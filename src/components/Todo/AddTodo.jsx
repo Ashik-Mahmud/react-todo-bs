@@ -11,6 +11,14 @@ export const AddTodo = () => {
     localStorage.setItem("toDos", JSON.stringify(toDoItems));
   };
 
+  const deleteItem = (id) => {
+    const currentItems = getTodo();
+    const exceptDeletedItemsArr = currentItems.filter(
+      (todo) => todo.serialNum !== id
+    );
+    localStorage.setItem("toDos", JSON.stringify(exceptDeletedItemsArr));
+  };
+
   const getTodo = () => {
     const toDosStorage = localStorage.getItem("toDos");
     let todoArr;
@@ -59,6 +67,14 @@ export const AddTodo = () => {
                         <td>{serialNum}</td>
                         <td>{todo}</td>
                         <td>{todayDate}</td>
+                        <td>
+                          <button
+                            onClick={() => deleteItem(serialNum)}
+                            className="btn btn-danger"
+                          >
+                            &times;
+                          </button>
+                        </td>
                       </tr>
                     ))}
                     <tr></tr>
